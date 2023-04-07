@@ -1,0 +1,15 @@
+/* colour palette #390099 #9e0059 #ff0054 #ff5400 #ffbd00 */
+
+:root {
+    --darkpurple: #390099;
+    --darkpink: #9e0059;
+    --pink: #ff0054;
+    --orange: #ff5400;
+    --yelloworange: #ffbd00;
+
+}
+
+header{
+    background-color: var(--yelloworange) !important;
+    text-align: center;
+}
