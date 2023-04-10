@@ -1,4 +1,4 @@
-var cityButtonList = document.querySelector('#cityButton')
+var cityButtonList = document.querySelector('#cityButtonList')
 var weatherCardSection = document.querySelector('#weatherCardSection')
 
 
@@ -9,6 +9,7 @@ function clearSearch(){
     document.querySelector('#searchText').value = '';
 
     $('#weatherCardSection').children().remove();
+    $('.currentWeatherCard').children().remove();
 
 
     geoFunc(cityName);
@@ -23,11 +24,12 @@ function geoFunc(cityName){
         }
     })
     .then(function(data){
-        weatherFunc(data[0])
+        forecastFunc(data[0])
+        currentWeatherFunc(data[0])
     })
 }
 
-function weatherFunc(data){
+function forecastFunc(data){
     fetch('https://api.openweathermap.org/data/2.5/forecast?lat='+data.lat+'&lon='+data.lon+'&appid=4b8fc9e50a57f1de38a6a899538e2356&units=imperial')
     .then(function (r){
         if(r.ok){
@@ -50,7 +52,7 @@ function weatherFunc(data){
 
             var weatherCardTemp = document.createElement('p')
             weatherCardTemp.setAttribute('class', 'card-text')
-            weatherCardTemp.textContent = 'Temp: ' + data.list[x*8].main.temp_max + '\u00B0F'
+            weatherCardTemp.textContent = 'Max Temp: ' + data.list[x*8].main.temp_max + '\u00B0F'
             
             var weatherCardWind = document.createElement('p')
             weatherCardWind.setAttribute('class', 'card-text')
@@ -71,10 +73,58 @@ function weatherFunc(data){
 function cityButtonFunc(data){
     var button = document.createElement('button')
     button.setAttribute('type', 'button')
-    button.setAttribute('class', 'btn btn-secondary')
+    button.setAttribute('class', 'btn btn-secondary cityButton')
+    button.setAttribute('data-city', data.city.name)
     button.textContent = data.city.name
 
+    localStorage.setItem(data.city.name, data.city.name)
+
     cityButtonList.append(button)
+}
+
+function currentWeatherFunc(data){
+    fetch('https://api.openweathermap.org/data/2.5/weather?lat='+data.lat+'&lon='+data.lon+'&appid=4b8fc9e50a57f1de38a6a899538e2356&units=imperial')
+    .then(function (r){
+        if(r.ok){
+            return r.json();
+        }
+    })
+    .then(function(data){
+        var currentWeatherCard = document.querySelector('.currentWeatherCard') 
+
+        var currentWeatherDiv = document.createElement('div')
+        currentWeatherDiv.setAttribute('class', 'card-body text-dark')
+
+        var currentWeatherHeader = document.createElement('h5')
+        currentWeatherHeader.setAttribute('class', 'card-title')
+        currentWeatherHeader.textContent = 'Currently, the Weather Is:'
+
+        var currentWeatherDate = document.createElement('h6')
+        currentWeatherDate.setAttribute('class', 'card-title')
+        currentWeatherDate.textContent = dayjs.unix(data.dt).format('MM/DD/YYYY')
+
+        var currentWeatherTemp = document.createElement('p')
+        currentWeatherTemp.setAttribute('class', 'card-text')
+        currentWeatherTemp.textContent = 'Temp: ' + data.main.temp
+
+        var currentWeatherWind = document.createElement('p')
+        currentWeatherWind.setAttribute('class', 'card-text')
+        currentWeatherWind.textContent = 'Wind: ' + data.wind.speed
+
+        var currentWeatherHumid = document.createElement('p')
+        currentWeatherHumid.setAttribute('class', 'card-text')
+        currentWeatherHumid.textContent = 'Humidity: ' + data.main.humidity
+
+        currentWeatherDiv.append(currentWeatherHeader, currentWeatherDate, currentWeatherTemp, currentWeatherWind, currentWeatherHumid)
+        currentWeatherCard.append(currentWeatherDiv)
+    })
+
+}
+
+function reselectCityFunc(e){
+    geoFunc(e.target.getAttribute('data-city'))
+    $('#weatherCardSection').children().remove();
+
 }
 
 
@@ -82,8 +132,5 @@ function cityButtonFunc(data){
 
 
 
-
-
-
-
+$(cityButtonList).on('click', '.cityButton', reselectCityFunc)
 $('#searchButton').on('click', clearSearch)

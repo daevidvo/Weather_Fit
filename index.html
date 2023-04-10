@@ -12,6 +12,7 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap" rel="stylesheet">
         <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></script>
         <script defer src="./assets/js/script.js"></script>
         <link rel="stylesheet" href="./assets/css/style.css"/>
         <title>Weather Styler</title>
@@ -36,17 +37,14 @@
                 <div>
                     <button type="button" class="btn btn-primary btn-lg btn-block" id="searchButton">Search</button>
 
-                    <div class="btn-group-vertical btn-block" id="cityButton" role="group" aria-label="Basic example">
+                    <div class="btn-group-vertical btn-block" id="cityButtonList" role="group" aria-label="Basic example">
                     </div>
                 </div>
             </div>
 
             <div class="container col-lg-9 col-sm-12 float-right text-center">
-                <div class="card border-dark my-4">
-                    <div class="card-body text-dark">
-                      <h5 class="card-title">Dark card title</h5>
-                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
+                <div class="card border-dark my-4 currentWeatherCard">
+                    
                 </div>
                 
                 <div class="d-flex justify-content-around" id="weatherCardSection">
