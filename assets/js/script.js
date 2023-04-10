@@ -1,8 +1,6 @@
 var cityButtonList = document.querySelector('#cityButtonList')
 var weatherCardSection = document.querySelector('#weatherCardSection')
 
-
-
 function clearSearch(){
     var cityName = document.querySelector('#searchText').value
 
