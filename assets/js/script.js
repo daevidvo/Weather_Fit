@@ -44,6 +44,11 @@ function forecastFunc(data){
     
                 var weatherCardInnerDiv = document.createElement('div')
                 weatherCardInnerDiv.setAttribute('class', 'card-body')
+                
+                var weatherCardImg = document.createElement('img')
+                weatherCardImg.setAttribute('class', 'card-img-top w-25 p-3')
+                weatherCardImg.setAttribute('src', `./assets/images/${data.list[x*8].weather[0].main}.svg`)
+                weatherCardImg.setAttribute('alt', 'card image cap')
     
                 var weatherCardDate = document.createElement('p')
                 weatherCardDate.setAttribute('class', 'card-text')
@@ -59,14 +64,14 @@ function forecastFunc(data){
                 
                 var weatherCardHumid = document.createElement('p')
                 weatherCardHumid.setAttribute('class', 'card-text')
-                weatherCardHumid.textContent = 'Humidity: ' + data.list[x*8].main.humidity
+                weatherCardHumid.textContent = 'Humidity: ' + data.list[x*8].main.humidity + '%'
     
-                weatherCardInnerDiv.append(weatherCardDate, weatherCardTemp, weatherCardWind, weatherCardHumid)
+                weatherCardInnerDiv.append(weatherCardImg, weatherCardDate, weatherCardTemp, weatherCardWind, weatherCardHumid)
                 weatherCard.append(weatherCardInnerDiv)
                 weatherCardSection.append(weatherCard)
             }
         }
-        
+        console.log(data)
     })
 }
 
@@ -98,6 +103,11 @@ function currentWeatherFunc(data){
         var currentWeatherDiv = document.createElement('div')
         currentWeatherDiv.setAttribute('class', 'card-body text-dark')
 
+        var currentWeatherImg = document.createElement('img')
+        currentWeatherImg.setAttribute('class', 'card-img-top w-25 p-2 mx-auto')
+        currentWeatherImg.setAttribute('src', `./assets/images/${data.weather[0].main}.svg`)
+        currentWeatherImg.setAttribute('alt', 'card image cap')
+
         var currentWeatherHeader = document.createElement('h5')
         currentWeatherHeader.setAttribute('class', 'card-title')
         currentWeatherHeader.textContent = 'Currently, the Weather for ' + data.name + ' Is:'
@@ -116,10 +126,10 @@ function currentWeatherFunc(data){
 
         var currentWeatherHumid = document.createElement('p')
         currentWeatherHumid.setAttribute('class', 'card-text')
-        currentWeatherHumid.textContent = 'Humidity: ' + data.main.humidity
+        currentWeatherHumid.textContent = 'Humidity: ' + data.main.humidity + '%'
 
         currentWeatherDiv.append(currentWeatherHeader, currentWeatherDate, currentWeatherTemp, currentWeatherWind, currentWeatherHumid)
-        currentWeatherCard.append(currentWeatherDiv)
+        currentWeatherCard.append(currentWeatherImg, currentWeatherDiv)
         }
     })
 
