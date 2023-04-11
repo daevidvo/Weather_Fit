@@ -2,11 +2,7 @@
 
 :root {
     --darkpurple: #390099;
-    --darkpink: #9e0059;
-    --pink: #ff0054;
-    --orange: #ff5400;
     --yelloworange: #ffbd00;
-
 }
 
 body{
@@ -16,4 +12,8 @@ body{
 header {
     background-color: var(--yelloworange) !important;
     text-align: center;
+}
+
+.btn {
+    background-color: var(--darkpurple);
 }
