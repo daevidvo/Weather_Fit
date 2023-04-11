@@ -150,6 +150,9 @@ function removeOldInfo(){ //removes the current city weather information along w
 function rememberCities(){ //function to recall button list on the left side along with displaying information on reloads.
     if (localStorage){ //checks to see if there is something in localStorage that the function could use.
         for (let x=0;x<localStorage.length;x=x+1){ //if there is something, then it will iterate through the list for the length of the localStorage items and add them to the current information displayed.
+            if (localStorage.key(x) === "INFO") {
+                localStorage.removeItem(x)
+            }
             geoFunc(localStorage.key(x));
         }
     }
