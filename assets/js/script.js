@@ -48,6 +48,7 @@ function forecastFunc(data){ //function to call the forecast information along w
                 
                 var weatherCardImg = document.createElement('img')
                 weatherCardImg.setAttribute('class', 'card-img-top w-25 p-3')
+                
                 weatherCardImg.setAttribute('src', `./assets/images/${data.list[x*8].weather[0].main}.svg`) //have to multiply x by 8 so that we can get information every 24 hours. In the api call, the weather is separated in 3 hour increments so 3*8=24 hour increments.
                 weatherCardImg.setAttribute('alt', 'card image cap')
     
