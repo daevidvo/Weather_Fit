@@ -12,7 +12,7 @@ function clearSearch(){ //function to clear the search bar and passes along the 
 }
 
 function geoFunc(cityName){
-    fetch('http://api.openweathermap.org/geo/1.0/direct?q='+cityName+'&limit=1&appid=4b8fc9e50a57f1de38a6a899538e2356')
+    fetch('https://api.openweathermap.org/geo/1.0/direct?q='+cityName+'&limit=1&appid=4b8fc9e50a57f1de38a6a899538e2356')
     .then(function (r){
         if(r.status === 200){
             return r.json();
